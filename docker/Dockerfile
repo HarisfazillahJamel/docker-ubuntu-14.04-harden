@@ -11,8 +11,6 @@ MAINTAINER Harisfazillah Jamel linuxmalaysia <linuxmalaysia@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-################## BEGIN INSTALLATION ######################
-
 # Installed needed tools
 
 RUN apt-get update && apt-get install -y \
@@ -24,14 +22,15 @@ RUN apt-get update && apt-get install -y \
     curl \
     pwgen \
     vim-tiny && \
+
 # cleanup
-    apt-get clean
+    apt-get clean && \
 
-################## END INSTALLATION ######################
-
-RUN ufw allow 22/tcp && \
+# setup ufw
+    ufw allow 22/tcp && \
     ufw enable && \
     ufw default deny && \
+
 # Add user1
     useradd user1 -m -s /bin/bash && \
     pwgen -N 1 > password.txt && \
