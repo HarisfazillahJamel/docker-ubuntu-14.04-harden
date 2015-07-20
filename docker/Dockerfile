@@ -29,8 +29,6 @@ RUN apt-get update && apt-get install -y \
 
 # setup ssh server
 
-    mkdir /var/run/sshd && \
-
 # SSH login fix. Otherwise user is kicked off after login
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
 
@@ -46,7 +44,7 @@ RUN apt-get update && apt-get install -y \
     echo "user1:`cat password.txt`" | chpasswd && \
     usermod -G sudo user1 && \
     mkdir -p /home/user1/GITHUB && \
-    chown user1:user1 /home/user1 /home/user1/GITHUB && \
+    chown user1:user1 /home/user1/GITHUB && \
     echo "PASSWORD For user1 is `cat password.txt`"
 
 ### End installation
