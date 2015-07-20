@@ -1,0 +1,48 @@
+############################################################
+# Dockerfile to build harden Ubuntu container images
+# Based on Ubuntu
+############################################################
+
+# Set the base image to Ubuntu
+FROM ubuntu:14.04
+
+# File Author / Maintainer
+MAINTAINER Harisfazillah Jamel linuxmalaysia <linuxmalaysia@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+################## BEGIN INSTALLATION ######################
+
+# Installed needed tools
+
+RUN apt-get update && apt-get install -y \
+    ssh \
+    ufw \
+    fail2ban \
+    git \
+    wget \
+    curl \
+    pwgen \
+    vim-tiny && \
+# cleanup
+    apt-get clean
+
+################## END INSTALLATION ######################
+
+RUN useradd user1 -m -s /bin/bash && \
+    pwgen -N 1 > password.txt && \
+    echo "user1:`cat password.txt`" | chpasswd && \
+    usermod -G sudo user1 && \
+    mkdir -p /home/user1/GITHUB && \
+    chown user1:user1 /home/user1 /home/user1/GITHUB && \
+    echo "Done"
+
+
+# Expose the default port
+EXPOSE 22
+
+# Default port to execute the entrypoint (ssh)
+CMD ["--port 22"]
+
+# Default command
+CMD /etc/rc.local; bash
