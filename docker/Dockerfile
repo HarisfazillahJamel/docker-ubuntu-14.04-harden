@@ -11,9 +11,10 @@ MAINTAINER Harisfazillah Jamel linuxmalaysia <linuxmalaysia@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# Installed needed tools
+### Start installation
 
 RUN apt-get update && apt-get install -y \
+    openssh-server \
     ssh \
     ufw \
     fail2ban \
@@ -25,6 +26,13 @@ RUN apt-get update && apt-get install -y \
 
 # cleanup
     apt-get clean && \
+
+# setup ssh server
+
+    mkdir /var/run/sshd && \
+
+# SSH login fix. Otherwise user is kicked off after login
+    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
 
 # setup ufw # 20150721 UFW and Iptables need root. Work in progress. 
 # (yes i can ask the base to be harden). Remove the lines.
@@ -41,12 +49,13 @@ RUN apt-get update && apt-get install -y \
     chown user1:user1 /home/user1 /home/user1/GITHUB && \
     echo "PASSWORD For user1 is `cat password.txt`"
 
+### End installation
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Expose the default port
 EXPOSE 22
 
-# Default port to execute the entrypoint (ssh)
-CMD ["--port 2202"]
-
-# Default command
-CMD /etc/rc.local; bash
+# Set default container command
+CMD ["/usr/sbin/sshd", "-D"]
