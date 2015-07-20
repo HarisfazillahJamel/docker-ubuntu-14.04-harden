@@ -42,7 +42,7 @@ RUN useradd user1 -m -s /bin/bash && \
 EXPOSE 22
 
 # Default port to execute the entrypoint (ssh)
-CMD ["--port 22"]
+CMD ["--port 2202"]
 
 # Default command
 CMD /etc/rc.local; bash
