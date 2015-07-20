@@ -3,8 +3,8 @@
 # Based on Ubuntu
 ############################################################
 
-# Set the base image to Ubuntu
-FROM ubuntu:14.04
+# Set the base image
+FROM dockerbase/openssh-server
 
 # File Author / Maintainer
 MAINTAINER Harisfazillah Jamel linuxmalaysia <linuxmalaysia@gmail.com>
@@ -29,13 +29,17 @@ RUN apt-get update && apt-get install -y \
 
 ################## END INSTALLATION ######################
 
-RUN useradd user1 -m -s /bin/bash && \
+RUN ufw allow 22/tcp && \
+    ufw enable && \
+    ufw default deny && \
+# Add user1
+    useradd user1 -m -s /bin/bash && \
     pwgen -N 1 > password.txt && \
     echo "user1:`cat password.txt`" | chpasswd && \
     usermod -G sudo user1 && \
     mkdir -p /home/user1/GITHUB && \
     chown user1:user1 /home/user1 /home/user1/GITHUB && \
-    echo "Done"
+    echo "PASSWORD For user1 is `cat password.txt`"
 
 
 # Expose the default port
