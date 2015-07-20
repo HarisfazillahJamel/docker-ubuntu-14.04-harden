@@ -26,10 +26,11 @@ RUN apt-get update && apt-get install -y \
 # cleanup
     apt-get clean && \
 
-# setup ufw
-    ufw allow 22/tcp && \
-    ufw enable && \
-    ufw default deny && \
+# setup ufw # 20150721 UFW and Iptables need root. Work in progress. 
+# (yes i can ask the base to be harden). Remove the lines.
+##    ufw allow 22/tcp && \
+##    ufw enable && \
+##    ufw default deny && \
 
 # Add user1
     useradd user1 -m -s /bin/bash && \
