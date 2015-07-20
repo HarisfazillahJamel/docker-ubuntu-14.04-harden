@@ -13,7 +13,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ### Start installation
 
-RUN apt-get update && apt-get install -y \
+RUN touch /var/log/auth.log && \
+    chown syslog:adm /var/log/auth.log && \
+
+# create the auth.log file or fail2ban will failed
+
+    apt-get update && apt-get install -y \
     openssh-server \
     ssh \
     ufw \
@@ -45,7 +50,11 @@ RUN apt-get update && apt-get install -y \
     usermod -G sudo user1 && \
     mkdir -p /home/user1/GITHUB && \
     chown user1:user1 /home/user1/GITHUB && \
-    echo "PASSWORD For user1 is `cat password.txt`"
+    echo "########################################" && \
+    echo " " && \
+    echo "PASSWORD For user1 is `cat password.txt`" && \
+    echo " " && \
+    echo "########################################"
 
 ### End installation
 
