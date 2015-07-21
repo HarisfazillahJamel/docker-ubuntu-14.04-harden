@@ -90,7 +90,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo " " && \
     echo "########################################" && \
 
-# A GITHUB
+# A GITHUB copy of linuxmalaysia/docker-ubuntu-14.04-harden
     cd /home/user1/GITHUB && \
     git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \
     cd && \

@@ -1,10 +1,12 @@
-Docker Container With Ubuntu 14.04 LTS harden and secure. Include SSH to access the server. Default user is user1 and the password in latest build details.
+Docker Container With Ubuntu 14.04 LTS harden and secure. Include SSH OpenSSH to access the server. Default user is user1 and the password in latest build details.
 
 https://registry.hub.docker.com/u/linuxmalaysia/docker-ubuntu-14.04-harden/
 
 1) OpenSSH
 2) Fail2ban
 3) UFW with 22/tcp allow and default deny
+4) harden and harden-nids packages
+5) docker run --privileged=true is needed by iptables
 
 Latest info in the docker/Dockerfile and hardening.sh
 
@@ -14,7 +16,7 @@ docker pull linuxmalaysia/docker-ubuntu-14.04-harden
 
 docker run --privileged=true -it -d -P --name my_ubuntu1 linuxmalaysia/docker-ubuntu-14.04-harden
 
-docker port my_ubuntu1 port
+docker port my_ubuntu1 port 22
 
 ssh user1@localhost -p ?????
 
