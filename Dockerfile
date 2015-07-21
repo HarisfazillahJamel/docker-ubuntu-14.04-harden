@@ -78,6 +78,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
 # A copy for each docker
     cd /home/user1/GITHUB && \
     git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \ 
+    cd ~ && pwd && \
 
     echo "########################################" && \
     echo " " && \
