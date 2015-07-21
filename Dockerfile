@@ -2,6 +2,7 @@
 # Dockerfile to build harden Ubuntu container images
 # Based on Ubuntu
 # Template https://docs.docker.com/examples/running_ssh_service/
+# GITHUB https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden
 # Start : 20 July 2015
 ############################################################
 
@@ -81,11 +82,11 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo " " && \
     echo "example to run :- " && \
     echo "docker pull linuxmalaysia/docker-ubuntu-14.04-harden" && \
-    echo "docker run --privileged=true -it -d -P --name my_ubuntu1 ubuntu_harden_ssh" && \
+    echo "docker run --privileged=true -it -d -P --name my_ubuntu1 linuxmalaysia/docker-ubuntu-14.04-harden" && \
     echo " " && \
     echo "########################################" && \
 
-# A copy for each docker
+# A GITHUB
     cd /home/user1/GITHUB && \
     git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \
     cd && \
