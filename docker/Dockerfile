@@ -15,15 +15,19 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ### Start installation
 
+# Hmm upstart issue
+# https://github.com/docker/docker/issues/1024
+
+RUN dpkg-divert --local --rename --add /sbin/initctl && \
+    ln -sf /bin/true /sbin/initctl && \
+    mkdir /var/run/sshd
+
 RUN apt-get update && \
 
-# Hmm need to reinstalled upstart 
-# https://github.com/docker/docker/issues/1024
-    apt-get --reinstall install -y upstart && \
     apt-get install -y \
-    openssh-server \
     ssh \
     ssh-client \
+    openssh-server \
     ufw \
     fail2ban \
     git \
@@ -59,10 +63,6 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     chown syslog:adm /var/log/auth.log && \
     service fail2ban start && \
 
-# Start sshd daemon
-
-    service ssh start && \
-
 # setup ufw # 20150721 UFW and Iptables need root. Work in progress. 
 # (yes i can ask the base to be harden). Remove the lines.
 ##    ufw allow 22/tcp && \
@@ -89,10 +89,5 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
 EXPOSE 22
 
 # Set default container command
-## refer to restart sshd service ### CMD ["/usr/sbin/sshd", "-D"]
 
-CMD echo "PASSWORD For user1 is `cat password.txt`"; /bin/bash
-
-# used this temp till figure out better solution to bash in and open port 22
-# till better CMD or ENTRYPOINT
-#### CMD /etc/rc.local; bash
+CMD ["/usr/sbin/sshd", "-D"]
