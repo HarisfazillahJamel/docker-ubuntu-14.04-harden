@@ -2,6 +2,17 @@
 # 21 July 2015
 # https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden
 
+# need to restart rsyslog
+
+service rsyslog stop
+service rsyslog start
+
+logger "test the logger"
+
+# Need to restart cron
+
+service cron restart
+
 # Need to restart fail2ban
 # fail2ban.sock need to be deleted
 
@@ -20,7 +31,12 @@ ufw allow 22/tcp
 ufw enable
 ufw default deny
 
-# run as daemon
+# restart snort
+
+service snort restart
+
+#### Only ssh daemon will be the last execute
+# SSH run in foreground and not detached
 
 /usr/sbin/sshd -D
 

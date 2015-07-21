@@ -15,6 +15,7 @@ MAINTAINER Harisfazillah Jamel linuxmalaysia <linuxmalaysia@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 ### Start installation
+### we are using Ubuntu packages called harden and harden-nids
 
 # Hmm upstart issue
 # https://github.com/docker/docker/issues/1024
@@ -35,6 +36,8 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
     wget \
     curl \
     pwgen \
+    harden \
+    harden-nids \
     vim-tiny && \
 
 # Upgrade others
