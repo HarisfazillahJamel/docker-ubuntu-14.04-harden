@@ -20,9 +20,9 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN dpkg-divert --local --rename --add /sbin/initctl && \
     ln -sf /bin/true /sbin/initctl && \
-    mkdir /var/run/sshd
+    mkdir /var/run/sshd && \
 
-RUN apt-get update && \
+    apt-get update && \
 
     apt-get install -y \
     ssh \
@@ -48,6 +48,7 @@ RUN apt-get update && \
 # setup ssh server
 
 # SSH login fix. Otherwise user is kicked off after login
+
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
 
     echo "### End Of Installation"
@@ -59,15 +60,12 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile && \
 
 # create the auth.log file or fail2ban will failed
+# still need docker run --privileged=true or iptables will failed.
+# http://www.jlee.biz/iptables-in-docker-permission-denied/
+# hardening.sh will fixed start issue. This only to init needed files.
     touch /var/log/auth.log && \
     chown syslog:adm /var/log/auth.log && \
     service fail2ban restart && \
-
-# setup ufw # 20150721 UFW and Iptables need root. Work in progress. 
-# (yes i can ask the base to be harden). Remove the lines.
-##    ufw allow 22/tcp && \
-##    ufw enable && \
-##    ufw default deny && \
 
 # Add user1
     useradd user1 -m -s /bin/bash && \
@@ -92,6 +90,8 @@ RUN chmod 755 /hardening.sh
 
 # Expose the default port
 EXPOSE 22
+
+VOLUME ["/var/run/sshd"]
 
 # Set default container command
 
