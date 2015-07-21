@@ -84,8 +84,8 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo " " && \
     echo "########################################"
 
-# Wordpress Initialization and Startup Script
-ADD ./hardening.sh /hardening.sh
+# Hardening Initialization and Startup Script
+ADD ./docker/hardening.sh /hardening.sh
 RUN chmod 755 /hardening.sh
 
 # Expose the default port
