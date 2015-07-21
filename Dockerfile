@@ -16,6 +16,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ### Start installation
 ### we are using Ubuntu packages called harden and harden-nids
+### https://launchpad.net/ubuntu/+source/harden
 
 # Hmm upstart issue
 # https://github.com/docker/docker/issues/1024
