@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image
-FROM dockerbase/openssh-server
+FROM ubuntu:14.04
 
 # File Author / Maintainer
 MAINTAINER Harisfazillah Jamel linuxmalaysia <linuxmalaysia@gmail.com>
@@ -13,12 +13,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ### Start installation
 
-RUN touch /var/log/auth.log && \
-    chown syslog:adm /var/log/auth.log && \
-
-# create the auth.log file or fail2ban will failed
-
-    apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     openssh-server \
     ssh \
     ufw \
@@ -31,6 +26,11 @@ RUN touch /var/log/auth.log && \
 
 # cleanup
     apt-get clean && \
+
+# create the auth.log file or fail2ban will failed
+    touch /var/log/auth.log && \
+    chown syslog:adm /var/log/auth.log && \
+    service fail2ban start && \
 
 # setup ssh server
 
