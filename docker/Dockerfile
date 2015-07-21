@@ -61,7 +61,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
 # create the auth.log file or fail2ban will failed
     touch /var/log/auth.log && \
     chown syslog:adm /var/log/auth.log && \
-    service fail2ban start && \
+    service fail2ban restart && \
 
 # setup ufw # 20150721 UFW and Iptables need root. Work in progress. 
 # (yes i can ask the base to be harden). Remove the lines.
@@ -82,14 +82,17 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo " " && \
     echo "example to run :- " && \
     echo "docker pull linuxmalaysia/docker-ubuntu-14.04-harden" && \
-    echo "sudo docker run -it -d -P --name my_ubuntu1 ubuntu_harden_ssh" && \
+    echo "docker run --privileged=true -it -d -P --name my_ubuntu1 ubuntu_harden_ssh" && \
     echo " " && \
-    echo "fail2ban need root. You have to start docker run with sudo." && \
     echo "########################################"
+
+# Wordpress Initialization and Startup Script
+ADD ./hardening.sh /hardening.sh
+RUN chmod 755 /hardening.sh
 
 # Expose the default port
 EXPOSE 22
 
 # Set default container command
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/bin/bash","/hardening.sh"]
