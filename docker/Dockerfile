@@ -85,7 +85,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo "########################################"
 
 # Hardening Initialization and Startup Script
-ADD docker/hardening.sh /hardening.sh
+ADD hardening.sh /hardening.sh
 RUN chmod 755 /hardening.sh
 
 # Expose the default port
