@@ -86,9 +86,10 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo "########################################" && \
 
 # A copy for each docker
-    pwd && ls && cd /home/user1/GITHUB && \
+    cd /home/user1/GITHUB && \
     git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \
-    cd / && pwd & ls
+    cd && \
+    pwd
 
 # Hardening Initialization and Startup Script
 ADD hardening.sh /hardening.sh
