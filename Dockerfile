@@ -75,11 +75,6 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     mkdir -p /home/user1/GITHUB && \
     chown user1:user1 /home/user1/GITHUB && \
 
-# A copy for each docker
-    cd /home/user1/GITHUB && \
-    git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \ 
-    cd ~ && pwd && \
-
     echo "########################################" && \
     echo " " && \
     echo "PASSWORD For user1 is `cat password.txt`" && \
@@ -88,7 +83,12 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo "docker pull linuxmalaysia/docker-ubuntu-14.04-harden" && \
     echo "docker run --privileged=true -it -d -P --name my_ubuntu1 ubuntu_harden_ssh" && \
     echo " " && \
-    echo "########################################"
+    echo "########################################" && \
+
+# A copy for each docker
+    pwd && ls && cd /home/user1/GITHUB && \
+    git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \
+    cd / && pwd & ls
 
 # Hardening Initialization and Startup Script
 ADD hardening.sh /hardening.sh
