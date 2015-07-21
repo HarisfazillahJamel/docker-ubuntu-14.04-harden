@@ -82,7 +82,9 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo " " && \
     echo "example to run :- " && \
     echo "docker pull linuxmalaysia/docker-ubuntu-14.04-harden" && \
-    echo "docker run -it -d -P --name my_ubuntu1 ubuntu_harden_ssh" && \
+    echo "sudo docker run -it -d -P --name my_ubuntu1 ubuntu_harden_ssh" && \
+    echo " " && \
+    echo "fail2ban need root. You have to start docker run with sudo." && \
     echo "########################################"
 
 # Expose the default port
