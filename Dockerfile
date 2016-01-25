@@ -69,7 +69,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 
     apt-add-repository -y ppa:ansible/ansible && \
     apt-get update && \
-    sudo apt-get install ansible && \
+    apt-get install -y ansible && \
 
 # Upgrade others
 # refer https://github.com/docker/docker/issues/1724
