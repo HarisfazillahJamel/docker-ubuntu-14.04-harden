@@ -58,7 +58,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
     harden \
     harden-nids \
     unbound
-    vim-tiny && \
+    pico && \
 
 # Upgrade others
 # refer https://github.com/docker/docker/issues/1724
