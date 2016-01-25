@@ -60,7 +60,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
     harden-nids \
     unbound \
     software-properties-common \
-    vim-tiny &&
+    vim-tiny && \
 
 
 # Install ansible
