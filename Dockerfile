@@ -1,10 +1,28 @@
-############################################################
+##
 # Dockerfile to build harden Ubuntu container images
 # Based on Ubuntu
 # Template https://docs.docker.com/examples/running_ssh_service/
 # GITHUB https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden
 # Start : 20 July 2015
-############################################################
+###
+#
+# Copyright (c) 2015-2016 Harisfazillah Jamel <linuxmalaysia@gmail.com>
+#
+# This is free software; you may redistribute it and/or modify
+# it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2,
+# or (at your option) any later version.
+#
+# This is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License with
+# the Debian operating system, in /usr/share/common-licenses/GPL;  if
+# not, write to the Free Software Foundation, Inc., 59 Temple Place,
+# Suite 330, Boston, MA 02111-1307 USA
+
 
 # Set the base image
 FROM ubuntu:14.04
@@ -39,6 +57,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
     pwgen \
     harden \
     harden-nids \
+    unbound
     vim-tiny && \
 
 # Upgrade others
@@ -68,11 +87,13 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
 # still need docker run --privileged=true or iptables will failed.
 # http://www.jlee.biz/iptables-in-docker-permission-denied/
 # hardening.sh will fixed start issue. This only to init needed files.
+
     touch /var/log/auth.log && \
     chown syslog:adm /var/log/auth.log && \
     service fail2ban restart && \
 
 # Add user1
+
     useradd user1 -m -s /bin/bash && \
     pwgen -N 1 > password.txt && \
     echo "user1:`cat password.txt`" | chpasswd && \
@@ -91,6 +112,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     echo "########################################" && \
 
 # A GITHUB copy of linuxmalaysia/docker-ubuntu-14.04-harden
+
     cd /home/user1/GITHUB && \
     git clone https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden.git && \
     cd && \
