@@ -2,7 +2,7 @@
 
 Docker Container With Ubuntu 14.04 LTS harden and secure. Include SSH OpenSSH to access the server. The default user is user1 and the password in the latest builds details log. Visit this website for latest information about this docker and latest builds details.
 
-[https://registry.hub.docker.com/u/linuxmalaysia/docker-ubuntu-14.04-harden/](https://registry.hub.docker.com/u/linuxmalaysia/docker-ubuntu-14.04-harden/)
+[https://hub.docker.com/repository/docker/linuxmalaysia/docker-ubuntu-14.04-harden](https://hub.docker.com/repository/docker/linuxmalaysia/docker-ubuntu-14.04-harden)
 
 This docker is installed with :-
 
@@ -42,6 +42,7 @@ docker build -t docker-ubuntu-14.04-harden .
 ```sh
 docker run --privileged=true -it -d -P --name my_ubuntu1 docker-ubuntu-14.04-harden
 ```
-Haris @ LinuxMalaysia
+haris @ Harisfazillah Jamel @ LinuxMalaysia
 
-21 July 2015
+25 Jan 2020
+##21 July 2015

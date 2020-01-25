@@ -3,9 +3,10 @@
 # Template https://docs.docker.com/examples/running_ssh_service/
 # GITHUB https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden
 # Start : 20 July 2015
+# Start revisit : 25 Jan 2020
 
 #
-# Copyright (c) 2015-2016 Harisfazillah Jamel <linuxmalaysia@gmail.com>
+# Copyright (c) 2015-2020 Harisfazillah Jamel <linuxmalaysia@gmail.com>
 #
 
 # This program is free software: you can redistribute it and/or modify

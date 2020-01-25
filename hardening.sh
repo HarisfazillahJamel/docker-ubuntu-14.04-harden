@@ -3,7 +3,7 @@
 # https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden
 
 #
-# Copyright (c) 2015-2016 Harisfazillah Jamel <linuxmalaysia@gmail.com>
+# Copyright (c) 2015-2020 Harisfazillah Jamel <linuxmalaysia@gmail.com>
 #
 
 # This program is free software: you can redistribute it and/or modify
@@ -21,14 +21,14 @@
 
 # This is my development scripts to harden server. Im using this docker to
 # applied hardening scripts. Use this Dockerfile and scripts related at your own risk.
-# Harisfazillah Jamel - Kuala Lumpur - Malaysia - 25 Jan 2015
+# Harisfazillah Jamel - Kuala Lumpur - Malaysia - 25 Jan 2015 - 25 Jan 2020
 
 # need to restart rsyslog
 
 service rsyslog stop
 service rsyslog start
 
-logger "test the logger"
+logger -it ujian "test the logger"
 
 # Need to restart cron
 
