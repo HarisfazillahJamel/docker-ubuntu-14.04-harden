@@ -1,3 +1,4 @@
+#!/bin/bash
 # Harisfazillah Jamel
 # 21 July 2015
 # https://github.com/HarisfazillahJamel/docker-ubuntu-14.04-harden

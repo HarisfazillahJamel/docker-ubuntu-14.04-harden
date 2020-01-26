@@ -60,6 +60,8 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
     harden \
     harden-nids \
     unbound \
+    bash \
+    sudo \
     software-properties-common \
     vim-tiny && \
 
@@ -109,7 +111,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile && \
     useradd user1 -m -s /bin/bash && \
     pwgen -N 1 > password.txt && \
     echo "user1:`cat password.txt`" | chpasswd && \
-    usermod -G sudo user1 && \
+    usermod -a -G sudo user1 && \
     mkdir -p /home/user1/GITHUB && \
     chown user1:user1 /home/user1/GITHUB && \
 
